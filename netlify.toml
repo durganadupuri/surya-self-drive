@@ -1,0 +1,9 @@
+[build]
+  command = "npm run build"
+  publish = "out"
+
+# Static export SPA fallback so direct navigation to routes works
+[[redirects]]
+  from = "/*"
+  to = "/index.html"
+  status = 200
