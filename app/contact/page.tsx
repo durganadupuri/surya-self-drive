@@ -79,7 +79,7 @@ export default function ContactPage() {
             method="POST"
             data-netlify="true"
             data-netlify-honeypot="bot-field"
-            action="/thank-you"
+            action="/thank-you/"
             className="mt-6 space-y-4"
           >
             {/* REQUIRED hidden input */}
