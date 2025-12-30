@@ -3,6 +3,8 @@ import Image from "next/image";
 import Link from "next/link";
 import VehicleCard from "@/components/VehicleCard";
 import type { ReactNode } from "react";
+import ServicesSection from "@/components/ServicesSection";
+import CarRentalSteps from "@/components/CarRentalSteps";
 
 export const metadata: Metadata = {
   title: "Home",
@@ -26,17 +28,18 @@ const features: Feature[] = [
     icon: (
       <svg
         viewBox="0 0 24 24"
-        className="h-5 w-5"
+        className="h-6 w-6"
         fill="none"
         stroke="currentColor"
-        strokeWidth="2"
+        strokeWidth="1.5"
         strokeLinecap="round"
         strokeLinejoin="round"
       >
-        <path d="M3 17h18" />
-        <path d="M5 17l1.5-8h11L19 17" />
-        <path d="M7 17v2" />
-        <path d="M17 17v2" />
+        <path d="M5 17a2 2 0 1 0 4 0 2 2 0 0 0-4-0Z" />
+        <path d="M15 17a2 2 0 1 0 4 0 2 2 0 0 0-4-0Z" />
+        <path d="M5 17h10" />
+        <path d="M8 12V7h12l-1 5H8Z" />
+        <path d="M3 17V7h2" />
       </svg>
     ),
   },
@@ -47,17 +50,20 @@ const features: Feature[] = [
     icon: (
       <svg
         viewBox="0 0 24 24"
-        className="h-5 w-5"
+        className="h-6 w-6"
         fill="none"
         stroke="currentColor"
-        strokeWidth="2"
+        strokeWidth="1.5"
         strokeLinecap="round"
         strokeLinejoin="round"
       >
-        <circle cx="12" cy="7" r="3" />
-        <path d="M7 20v-2a3 3 0 0 1 3-3h4a3 3 0 0 1 3 3v2" />
-        <path d="M5 20v-1a4 4 0 0 1 4-4" />
-        <path d="M19 20v-1a4 4 0 0 0-4-4" />
+        <rect x="3" y="4" width="18" height="14" rx="2" />
+        <path d="M3 8h18" />
+        <path d="M7 12v4" />
+        <path d="M12 12v4" />
+        <path d="M17 12v4" />
+        <circle cx="7" cy="6" r="1" />
+        <circle cx="17" cy="6" r="1" />
       </svg>
     ),
   },
@@ -68,17 +74,19 @@ const features: Feature[] = [
     icon: (
       <svg
         viewBox="0 0 24 24"
-        className="h-5 w-5"
+        className="h-6 w-6"
         fill="none"
         stroke="currentColor"
-        strokeWidth="2"
+        strokeWidth="1.5"
         strokeLinecap="round"
         strokeLinejoin="round"
       >
-        <path d="M8 2v4" />
-        <path d="M16 2v4" />
-        <rect x="3" y="4" width="18" height="18" rx="2" />
+        <rect x="3" y="4" width="18" height="16" rx="2" />
         <path d="M3 10h18" />
+        <path d="M8 14h.01" />
+        <path d="M16 14h.01" />
+        <circle cx="8" cy="18" r="1" />
+        <circle cx="16" cy="18" r="1" />
       </svg>
     ),
   },
@@ -89,19 +97,71 @@ const features: Feature[] = [
     icon: (
       <svg
         viewBox="0 0 24 24"
-        className="h-5 w-5"
+        className="h-6 w-6"
         fill="none"
         stroke="currentColor"
-        strokeWidth="2"
+        strokeWidth="1.5"
         strokeLinecap="round"
         strokeLinejoin="round"
       >
-        <path d="M20 5h-3.2l-1.6-2H8.8L7.2 5H4a2 2 0 0 0-2 2v12a2 2 0 0 0 2 2h16a2 2 0 0 0 2-2V7a2 2 0 0 0-2-2Z" />
-        <path d="M12 17a4 4 0 1 0 0-8 4 4 0 0 0 0 8Z" />
+        <path d="M14.5 4h-5L7 7H4a2 2 0 0 0-2 2v9a2 2 0 0 0 2 2h16a2 2 0 0 0 2-2V9a2 2 0 0 0-2-2h-3l-2.5-3Z" />
+        <circle cx="12" cy="13" r="3" />
       </svg>
     ),
   },
 ];
+
+function ServiceCard({
+  feature,
+  index,
+}: {
+  feature: Feature;
+  index: number;
+}) {
+  const number = String(index + 1).padStart(2, "0");
+
+  return (
+    <div className="group relative h-[255.5px] w-[300px] overflow-hidden rounded-3xl border border-border/60 bg-surface p-6 shadow-[0_18px_45px_-28px_rgba(0,0,0,0.9)] transition-all duration-500 ease-out hover:-translate-y-1 hover:border-accent/40 hover:shadow-[0_28px_65px_-35px_rgba(250,204,21,0.35)]">
+      {/* Geometric background pattern matching reference */}
+      <div
+        className="pointer-events-none absolute inset-0 opacity-[0.04]"
+        style={{
+          backgroundImage: `url("data:image/svg+xml,%3Csvg width='40' height='40' viewBox='0 0 40 40' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='%23facc15' fill-opacity='0.08'%3E%3Cpath d='M0 0h40v40H0z'/%3E%3Cpath d='M20 0v40M0 20h40' stroke='%23facc15' stroke-width='0.5' stroke-opacity='0.1'/%3E%3C/g%3E%3C/svg%3E")`,
+        }}
+      />
+
+      {/* Horizontal bar growing from center outward on hover */}
+      <div className="pointer-events-none absolute inset-0 flex items-center justify-center">
+        <div className="absolute h-full w-0 bg-accent opacity-0 transition-all duration-500 ease-out group-hover:w-full group-hover:opacity-100" />
+      </div>
+
+      {/* Bottom accent strip */}
+      <div className="pointer-events-none absolute bottom-0 left-0 h-1.5 w-full bg-accent transition-colors duration-500 group-hover:bg-accent-foreground" />
+
+      {/* Number badge: white square with rounded corners, fully on the card, right-to-left wipe */}
+      <div className="absolute right-4 top-1/2 z-10 -translate-y-1/2 overflow-hidden rounded-2xl bg-foreground px-3 py-1.5 text-xs font-extrabold text-background shadow-lg transition-colors duration-500 group-hover:bg-accent-foreground" style={{ width: '55px', height: '55px' }}>
+        <div className="relative flex h-full w-full items-center justify-center">
+          <span className="relative z-10 block transition-colors duration-500 group-hover:text-accent">
+            {number}
+          </span>
+          <div className="absolute inset-y-0 right-0 w-0 bg-accent-foreground transition-all duration-500 ease-out group-hover:w-full" />
+        </div>
+      </div>
+
+      <div className="relative">
+        <div className="text-accent transition-colors duration-500 group-hover:text-accent-foreground [&>svg]:h-7 [&>svg]:w-7">
+          {feature.icon}
+        </div>
+        <div className="mt-6 text-base font-extrabold tracking-tight text-accent transition-colors duration-500 group-hover:text-accent-foreground">
+          {feature.title}
+        </div>
+        <p className="mt-3 text-sm leading-6 text-muted-foreground transition-colors duration-500 group-hover:text-accent-foreground/80">
+          {feature.description}
+        </p>
+      </div>
+    </div>
+  );
+}
 
 export default function Home() {
   return (
@@ -225,40 +285,50 @@ export default function Home() {
         </div>
       </section>
 
-      <section className="mx-auto max-w-6xl px-4 pb-14 sm:px-6">
-        <div className="flex items-end justify-between gap-6">
-          <div className="max-w-2xl">
-            <h2 className="text-2xl font-semibold tracking-tight sm:text-3xl">
-              What we offer
-            </h2>
-            <p className="mt-3 text-sm leading-6 text-muted-foreground">
-              A clean, professional self-drive experience for city rides, trips,
-              events, and shoots.
-            </p>
+      {/* <section className="relative mx-auto max-w-6xl px-4 pb-14 pt-6 sm:px-6">
+        <div className="pointer-events-none absolute inset-0 -z-10 bg-gradient-to-b from-accent/10 via-transparent to-transparent" />
+
+        <div className="mx-auto max-w-3xl text-center">
+          <div className="inline-flex items-center gap-2 text-[11px] font-semibold uppercase tracking-[0.28em] text-accent">
+            <span className="inline-flex h-7 w-7 items-center justify-center rounded-xl bg-accent/15 ring-1 ring-accent/25">
+              <svg
+                viewBox="0 0 24 24"
+                className="h-4 w-4"
+                fill="none"
+                stroke="currentColor"
+                strokeWidth="2"
+                strokeLinecap="round"
+                strokeLinejoin="round"
+              >
+                <path d="M3 17h18" />
+                <path d="M5 17l1.5-8h11L19 17" />
+                <path d="M7 17v2" />
+                <path d="M17 17v2" />
+              </svg>
+            </span>
+            <span>What we offer</span>
           </div>
+
+          <h2 className="mt-4 text-3xl font-extrabold tracking-tight sm:text-4xl">
+            What we offer
+          </h2>
+          <p className="mx-auto mt-4 max-w-2xl text-sm leading-6 text-muted-foreground">
+            A clean, professional self-drive experience for city rides, trips,
+            events, and shoots.
+          </p>
         </div>
 
-        <div className="mt-8 grid gap-4 sm:grid-cols-2 lg:grid-cols-4">
-          {features.map((f) => (
-            <div
-              key={f.title}
-              className="rounded-2xl border border-border/60 bg-surface p-6 shadow-sm transition hover:-translate-y-0.5 hover:shadow-lg"
-            >
-              <div className="inline-flex h-11 w-11 items-center justify-center rounded-xl bg-accent/15 text-accent ring-1 ring-accent/30">
-                {f.icon}
-              </div>
-              <div className="mt-4 text-base font-semibold tracking-tight">
-                {f.title}
-              </div>
-              <p className="mt-2 text-sm leading-6 text-muted-foreground">
-                {f.description}
-              </p>
-            </div>
+        <div className="mt-12 flex flex-wrap justify-center gap-6 lg:flex-nowrap lg:justify-start">
+          {features.map((f, idx) => (
+            <ServiceCard key={f.title} feature={f} index={idx} />
           ))}
         </div>
 
-        <div className="mt-10 rounded-2xl border border-border/60 bg-gradient-to-br from-accent/15 via-white/5 to-white/0 p-6">
-          <div className="grid gap-4 md:grid-cols-2 md:items-center">
+        <div className="relative mt-12 overflow-hidden rounded-3xl border border-border/60 bg-surface p-7">
+          <div className="pointer-events-none absolute inset-0 bg-gradient-to-br from-accent/12 via-transparent to-transparent" />
+          <div className="pointer-events-none absolute bottom-0 left-0 h-1.5 w-full bg-accent" />
+
+          <div className="relative grid gap-5 md:grid-cols-2 md:items-center">
             <div>
               <div className="text-sm font-semibold text-foreground">
                 Vehicle delivery information
@@ -268,24 +338,25 @@ export default function Home() {
                 and timing. Contact us to confirm availability and charges.
               </p>
             </div>
-            <div className="flex gap-3 md:justify-end">
+            <div className="flex flex-col gap-3 sm:flex-row md:justify-end">
               <Link
                 href="/contact"
-                className="inline-flex h-11 items-center justify-center rounded-xl bg-accent px-5 font-semibold text-accent-foreground transition hover:opacity-90"
+                className="inline-flex h-11 items-center justify-center rounded-2xl bg-accent px-6 font-semibold text-accent-foreground transition duration-300 hover:opacity-90"
               >
                 Contact Us
               </Link>
               <Link
                 href="/vehicles"
-                className="inline-flex h-11 items-center justify-center rounded-xl border border-border bg-white/5 px-5 font-semibold text-foreground transition hover:bg-white/10"
+                className="inline-flex h-11 items-center justify-center rounded-2xl border border-border bg-white/5 px-6 font-semibold text-foreground transition duration-300 hover:bg-white/10"
               >
                 Browse Fleet
               </Link>
             </div>
           </div>
         </div>
-      </section>
-
+      </section> */}
+      <div><ServicesSection></ServicesSection></div>
+      <CarRentalSteps />
       <section className="mx-auto max-w-6xl px-4 pb-16 sm:px-6">
         <div className="flex items-end justify-between gap-6">
           <div>

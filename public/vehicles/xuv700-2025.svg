@@ -5,16 +5,16 @@
       <stop offset="1" stop-color="#131326"/>
     </linearGradient>
     <linearGradient id="accent" x1="300" y1="260" x2="1300" y2="760" gradientUnits="userSpaceOnUse">
-      <stop stop-color="#FACC15" stop-opacity="0.26"/>
-      <stop offset="1" stop-color="#FACC15" stop-opacity="0"/>
+      <stop stop-color="#FFB51D" stop-opacity="0.26"/>
+      <stop offset="1" stop-color="#FFB51D" stop-opacity="0"/>
     </linearGradient>
   </defs>
   <rect width="1600" height="1000" rx="56" fill="url(#bg)"/>
   <rect x="240" y="220" width="1120" height="600" rx="52" fill="url(#accent)"/>
-  <path d="M260 690C420 560 560 520 760 520H1100C1240 520 1340 610 1380 690" stroke="#FACC15" stroke-opacity="0.6" stroke-width="10"/>
+  <path d="M260 690C420 560 560 520 760 520H1100C1240 520 1340 610 1380 690" stroke="#FFB51D" stroke-opacity="0.6" stroke-width="10"/>
   <path d="M330 690H1310" stroke="#E5E7EB" stroke-opacity="0.18" stroke-width="10"/>
-  <circle cx="560" cy="715" r="74" fill="#0A0A0A" stroke="#FACC15" stroke-opacity="0.68" stroke-width="10"/>
-  <circle cx="1160" cy="715" r="74" fill="#0A0A0A" stroke="#FACC15" stroke-opacity="0.68" stroke-width="10"/>
+  <circle cx="560" cy="715" r="74" fill="#0A0A0A" stroke="#FFB51D" stroke-opacity="0.68" stroke-width="10"/>
+  <circle cx="1160" cy="715" r="74" fill="#0A0A0A" stroke="#FFB51D" stroke-opacity="0.68" stroke-width="10"/>
   <text x="120" y="170" fill="#E5E7EB" fill-opacity="0.9" font-family="Arial, Helvetica, sans-serif" font-size="64" font-weight="700">XUV700</text>
-  <text x="120" y="240" fill="#FACC15" fill-opacity="0.95" font-family="Arial, Helvetica, sans-serif" font-size="36" font-weight="600">2025</text>
+  <text x="120" y="240" fill="#FFB51D" fill-opacity="0.95" font-family="Arial, Helvetica, sans-serif" font-size="36" font-weight="600">2025</text>
 </svg>
