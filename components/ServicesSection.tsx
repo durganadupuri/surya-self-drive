@@ -58,7 +58,7 @@ export default function ServicesSection() {
               </div>
 
               {/* Number */}
-              <div className="absolute -right-[3%] top-1/2 z-10 -translate-y-1/2 overflow-hidden rounded-2xl bg-foreground px-3 py-1.5 text-lg font-black text-background shadow-lg transition-colors duration-500 group-hover:bg-accent-foreground flex items-center justify-center" style={{ width: '60px', height: '58px' }}>
+              <div className="absolute -right-[3%] top-1/2 z-10 -translate-y-1/2 overflow-hidden rounded-2xl bg-foreground px-3 py-1.5 text-lg font-black text-background shadow-lg transition-colors duration-500 group-hover:bg-accent-foreground flex items-center justify-center" style={{ width: '50px', height: '47px' }}>
                 <div className="relative flex h-full w-full items-center justify-center">
                   <span className="relative z-10 block transition-colors duration-500 group-hover:text-accent">
                     {service.number}

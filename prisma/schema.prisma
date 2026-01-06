@@ -1,0 +1,105 @@
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+
+///////////////////////////
+// VEHICLE
+///////////////////////////
+
+model Vehicle {
+  id            Int              @id @default(autoincrement())
+  name          String
+  brand         String
+  modelYear     Int
+  seaterType    Int
+  category      VehicleCategory
+  description   String?
+  imageUrl      String
+  isAvailable   Boolean          @default(true)
+
+  pricing       VehiclePricing?
+  images        VehicleImage[]
+
+  createdAt     DateTime         @default(now())
+  updatedAt     DateTime         @updatedAt
+}
+
+///////////////////////////
+// VEHICLE PRICING
+///////////////////////////
+
+model VehiclePricing {
+  id            Int       @id @default(autoincrement())
+  vehicleId     Int       @unique
+
+  weekdayPrice  Int?
+  weekendPrice  Int?
+
+  minPrice      Int?
+  maxPrice      Int?
+
+  priceType     PriceType
+
+  vehicle       Vehicle  @relation(fields: [vehicleId], references: [id], onDelete: Cascade)
+
+  createdAt     DateTime @default(now())
+}
+
+///////////////////////////
+// VEHICLE IMAGES (future-proof)
+///////////////////////////
+
+model VehicleImage {
+  id         Int      @id @default(autoincrement())
+  vehicleId  Int
+  imageUrl   String
+
+  vehicle    Vehicle @relation(fields: [vehicleId], references: [id], onDelete: Cascade)
+}
+
+///////////////////////////
+// SERVICES
+///////////////////////////
+
+model Service {
+  id          Int      @id @default(autoincrement())
+  title       String
+  description String
+  isActive    Boolean  @default(true)
+
+  createdAt   DateTime @default(now())
+}
+
+///////////////////////////
+// CONTACT INFO
+///////////////////////////
+
+model ContactInfo {
+  id              Int      @id @default(autoincrement())
+  phonePrimary    String
+  phoneSecondary  String?
+  address         String
+  city            String
+
+  createdAt       DateTime @default(now())
+}
+
+///////////////////////////
+// ENUMS
+///////////////////////////
+
+enum VehicleCategory {
+  STANDARD
+  LUXURY
+}
+
+enum PriceType {
+  FIXED
+  RANGE
+}

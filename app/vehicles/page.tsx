@@ -7,55 +7,73 @@ export const metadata: Metadata = {
     "Browse our self-drive vehicle lineup with weekday and weekend pricing. Contact Surya Self Drive to book.",
 };
 
-export const dynamic = "force-static";
+const vehicles: VehicleFromAPI[] = await getVehicles();
 
-type Vehicle = {
+
+type VehicleFromAPI = {
+  id: number;
   name: string;
-  year: number;
-  weekdayPrice: string;
-  weekendPrice: string;
-  imageSrc: string;
+  modelYear: number;
+  imageUrl: string;
+  pricing?: {
+    weekdayPrice?: number;
+    weekendPrice?: number;
+  };
 };
 
-const vehicles: Vehicle[] = [
-  {
-    name: "Hyundai i20",
-    year: 2017,
-    weekdayPrice: "Call for price",
-    weekendPrice: "Call for price",
-    imageSrc: "/vehicles/i20.jpg",
-  },
-  {
-    name: "Baleno",
-    year: 2024,
-    weekdayPrice: "Call for price",
-    weekendPrice: "Call for price",
-    imageSrc: "/vehicles/baleno.png",
-  },
-  {
-    name: "Thar",
-    year: 2025,
-    weekdayPrice: "Call for price",
-    weekendPrice: "Call for price",
-    imageSrc: "/vehicles/thar-2025.png",
-  },
-  {
-    name: "XUV700",
-    year: 2025,
-    weekdayPrice: "Call for price",
-    weekendPrice: "Call for price",
-    imageSrc: "/vehicles/xuv.png",
-  },
-  {
-    name: "Swift Dzire",
-    year: 2015,
-    weekdayPrice: "Call for price",
-    weekendPrice: "Call for price",
-    imageSrc: "/vehicles/dzire.webp",
-  },
-];
 
-export default function VehiclesPage() {
+async function getVehicles() {
+  const res = await fetch("http://localhost:3000/api/vehicles", {
+    cache: "no-store",
+  });
+
+  if (!res.ok) {
+    throw new Error("Failed to fetch vehicles");
+  }
+
+  return res.json();
+}
+
+// const vehicles: Vehicle[] = [
+//   {
+//     name: "Hyundai i20",
+//     year: 2017,
+//     weekdayPrice: "Call for price",
+//     weekendPrice: "Call for price",
+//     imageSrc: "/vehicles/i20.jpg",
+//   },
+//   {
+//     name: "Baleno",
+//     year: 2024,
+//     weekdayPrice: "Call for price",
+//     weekendPrice: "Call for price",
+//     imageSrc: "/vehicles/baleno.png",
+//   },
+//   {
+//     name: "Thar",
+//     year: 2025,
+//     weekdayPrice: "Call for price",
+//     weekendPrice: "Call for price",
+//     imageSrc: "/vehicles/thar-2025.png",
+//   },
+//   {
+//     name: "XUV700",
+//     year: 2025,
+//     weekdayPrice: "Call for price",
+//     weekendPrice: "Call for price",
+//     imageSrc: "/vehicles/xuv.png",
+//   },
+//   {
+//     name: "Swift Dzire",
+//     year: 2015,
+//     weekdayPrice: "Call for price",
+//     weekendPrice: "Call for price",
+//     imageSrc: "/vehicles/dzire.webp",
+//   },
+// ];
+
+export default async function VehiclesPage() {
+  const vehicles = await getVehicles();
   return (
     <div className="mx-auto max-w-6xl px-4 py-14 sm:px-6">
       <div className="flex flex-col gap-3 md:flex-row md:items-end md:justify-between">
@@ -75,16 +93,25 @@ export default function VehiclesPage() {
       </div>
 
       <div className="mt-10 grid gap-5 sm:grid-cols-2 lg:grid-cols-3">
-        {vehicles.map((v) => (
+        {vehicles.map((v: any) => (
           <VehicleCard
-            key={`${v.name}-${v.year}`}
+            key={v.id}
             name={v.name}
-            year={v.year}
-            weekdayPrice={v.weekdayPrice}
-            weekendPrice={v.weekendPrice}
-            imageSrc={v.imageSrc}
+            year={v.modelYear}
+            weekdayPrice={
+              v.pricing?.weekdayPrice
+                ? `₹${v.pricing.weekdayPrice}`
+                : "Call for price"
+            }
+            weekendPrice={
+              v.pricing?.weekendPrice
+                ? `₹${v.pricing.weekendPrice}`
+                : "Call for price"
+            }
+            imageSrc={v.imageUrl}
           />
         ))}
+
       </div>
 
       <div className="mt-12 grid gap-4 md:grid-cols-3">
